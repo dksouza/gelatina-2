@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SALUD</title>
+
+  <script>!function (i, n) { i._plt = i._plt || (n && n.timeOrigin ? n.timeOrigin + n.now() : Date.now()) }(window, performance);</script>
+  <link rel="preload"
+    href="https://scripts.converteai.net/72f8b575-31a6-471a-9f86-b66106155ce9/players/69d9293cf57b23cbc30db7b7/v4/player.js"
+    as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload"
+    href="https://cdn.converteai.net/72f8b575-31a6-471a-9f86-b66106155ce9/69d928b2f57b23cbc30db5ca/main.m3u8"
+    as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0f2f5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: #cc0000;
+      padding: 18px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      background: #cc0000;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      overflow: hidden;
+      padding: 8px 0;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      white-space: nowrap;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: ticker 22s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translateX(100vw);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* ── VIDEO AREA ── */
+    .video-section {
+      max-width: 800px;
+      margin: 28px auto 0;
+      padding: 0 16px;
+    }
+
+    .video-wrapper {
+      width: 100%;
+    }
+
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* ── VIEWER COUNTER ── */
+    .viewer-counter {
+      max-width: 800px;
+      margin: 10px auto 0;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: #555;
+    }
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      background: #e02020;
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.7);
+      }
+    }
+
+    #viewer-count {
+      font-weight: 700;
+      color: #e02020;
+    }
+
+    /* ── FACEBOOK COMMENTS SIMULATOR ── */
+    .fb-section {
+      max-width: 800px;
+      margin: 24px auto 48px;
+      padding: 0 12px;
+    }
+
+    /* Header */
+    .fb-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding: 12px 14px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.10);
+    }
+
+    .fb-header svg {
+      flex-shrink: 0;
+    }
+
+    .fb-header-text {
+      font-size: 0.85rem;
+      color: #606770;
+      line-height: 1.3;
+    }
+
+    .fb-header-text strong {
+      font-size: 0.95rem;
+      color: #1c1e21;
+      display: block;
+    }
+
+    /* Comment card */
+    .fb-comment-box {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+      padding: 12px 12px 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Row: avatar + bubble */
+    .fb-comment-meta {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+
+    /* Avatar */
+    .fb-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.82rem;
+      color: #fff;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Bubble wrapper */
+    .fb-comment-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Name + text bubble */
+    .fb-bubble {
+      background: #f0f2f5;
+      border-radius: 16px;
+      padding: 8px 12px 10px;
+      position: relative;
+    }
+
+    .fb-commenter-name {
+      font-weight: 700;
+      font-size: 0.84rem;
+      color: #1c1e21;
+      margin-bottom: 3px;
+    }
+
+    .fb-comment-text {
+      font-size: 0.9rem;
+      color: #1c1e21;
+      line-height: 1.48;
+      word-break: break-word;
+    }
+
+    /* Resultado badge inside bubble */
+    .fb-badge {
+      display: inline-block;
+      background: #ddeeff;
+      color: #1877f2;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 2px 8px;
+      margin-top: 6px;
+    }
+
+    /* Reactions pill — sits BELOW the bubble */
+    .fb-reaction-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: #fff;
+      border: 1px solid #e4e6ea;
+      border-radius: 20px;
+      padding: 3px 8px;
+      font-size: 0.78rem;
+      color: #65676b;
+      margin-top: 5px;
+      margin-left: 6px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+      line-height: 1;
+    }
+
+    .fb-reaction-pill .emoji {
+      font-size: 0.9rem;
+    }
+
+    .fb-reaction-pill .count {
+      font-weight: 700;
+      color: #1877f2;
+      margin-left: 2px;
+    }
+
+    /* Actions row */
+    .fb-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: #65676b;
+      margin-top: 4px;
+      padding-left: 2px;
+      flex-wrap: wrap;
+    }
+
+    .fb-actions .act {
+      cursor: pointer;
+      font-weight: 700;
+      color: #65676b;
+      padding: 2px 0;
+    }
+
+    .fb-actions .act:hover {
+      color: #1877f2;
+    }
+
+    .fb-actions .act.like:hover {
+      color: #e0365f;
+    }
+
+    .fb-time {
+      color: #bec3c9;
+      font-weight: 400;
+      font-size: 0.74rem;
+    }
+
+    /* ── Reply thread ── */
+    .fb-replies {
+      margin-top: 12px;
+      padding-left: 14px;
+      border-left: 2.5px solid #d8dbe1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .fb-reply {
+      position: relative;
+      padding: 8px 0 0 0;
+    }
+
+    /* Small curved connector from border-left to avatar */
+    .fb-reply::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: -14px;
+      width: 12px;
+      height: 12px;
+      border-left: 2.5px solid #d8dbe1;
+      border-bottom: 2.5px solid #d8dbe1;
+      border-bottom-left-radius: 6px;
+    }
+
+    .fb-reply .fb-comment-meta {
+      gap: 8px;
+    }
+
+    /* Smaller avatar with accent ring */
+    .fb-reply .fb-avatar {
+      width: 28px;
+      height: 28px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgba(0, 0, 0, 0.10);
+      flex-shrink: 0;
+    }
+
+    /* Reply bubble — slightly lighter + tighter */
+    .fb-reply .fb-bubble {
+      background: #f7f8fa;
+      border-radius: 12px;
+      padding: 7px 11px 8px;
+      position: relative;
+    }
+
+    .fb-reply .fb-commenter-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* "↩ Resposta" micro-tag */
+    .fb-reply .fb-commenter-name::after {
+      content: '↩ resposta';
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: #1877f2;
+      background: #e7f0ff;
+      border-radius: 4px;
+      padding: 1px 5px;
+      text-transform: lowercase;
+      letter-spacing: 0.01em;
+    }
+
+    .fb-reply .fb-comment-text {
+      font-size: 0.83rem;
+      color: #3c3e42;
+      line-height: 1.45;
+      margin-top: 2px;
+    }
+
+    /* Reaction pill for replies — smaller */
+    .fb-reply .fb-reaction-pill {
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      margin-top: 4px;
+      margin-left: 4px;
+    }
+
+    .fb-reply .fb-reaction-pill .emoji {
+      font-size: 0.8rem;
+    }
+
+    /* Actions row for replies */
+    .fb-reply .fb-actions {
+      font-size: 0.73rem;
+      gap: 8px;
+      margin-top: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>SALUD</h1>
+  </header>
+
+  <!-- NEWS TICKER -->
+  <div class="ticker-wrap">
+    <span class="ticker-text">
+      ÚLTIMAS NOTICIAS SOBRE SALUD Y BIENESTAR &bull; ÚLTIMAS NOTICIAS SOBRE SALUD Y BIENESTAR &bull; ÚLTIMAS NOTICIAS
+      SOBRE SALUD Y BIENESTAR &bull; ÚLTIMAS NOTICIAS SOBRE SALUD Y BIENESTAR &bull;
+    </span>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="video-section">
+    <div class="video-wrapper">
+      <vturb-smartplayer id="vid-69d9293cf57b23cbc30db7b7"
+        style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>
+      <script
+        type="text/javascript"> var s = document.createElement("script"); s.src = "https://scripts.converteai.net/72f8b575-31a6-471a-9f86-b66106155ce9/players/69d9293cf57b23cbc30db7b7/v4/player.js", s.async = !0, document.head.appendChild(s); </script>
+    </div>
+  </div>
+
+  <!-- VIEWER COUNTER -->
+  <div class="viewer-counter">
+    <div class="pulse-dot"></div>
+    <span><span id="viewer-count">0</span> personas están viendo este video ahora</span>
+  </div>
+
+  <!-- FACEBOOK COMMENTS -->
+  <div class="fb-section">
+
+    <!--
+    <div class="fb-header">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="12" fill="#1877f2" />
+        <path fill="#fff"
+          d="M16.5 8H14c-.3 0-.5.2-.5.5V10h3l-.4 2.5H13.5V19h-3v-6.5H9V10h1.5V8.5C10.5 6.6 11.8 5 14 5h2.5V8z" />
+      </svg>
+      <div class="fb-header-text">
+        <strong>Comentarios de Facebook</strong><br>
+        Ordenar por: Más relevantes
+      </div>
+    </div>
+  -->
+
+    <!-- Comment 1 -->
+    <div class="fb-comment-box">
+      <div class="fb-comment-meta">
+        <div class="fb-avatar" style="background:#e05c97;">PG</div>
+        <div class="fb-comment-body">
+          <div class="fb-commenter-name">Patricia Gómez</div>
+          <div class="fb-comment-text">Al principio era escéptica, pero después de probarlo estoy encantada. Finalmente
+            alcancé mi peso ideal y esto me ayudó a cumplir mis otros objetivos también.</div>
+          <div class="fb-actions">
+            <span>Me gusta</span>
+            <span>Responder</span>
+            <span class="fb-time">hace 24 min</span>
+            <div class="fb-reactions">❤️ 😊 👍 <strong>32</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment 2 -->
+    <div class="fb-comment-box">
+      <div class="fb-comment-meta">
+        <div class="fb-avatar" style="background:#5b8dee;">JA</div>
+        <div class="fb-comment-body">
+          <div class="fb-commenter-name">Jennifer Avery</div>
+          <div class="fb-comment-text">Chica, yo también perdí 11 libras en solo una semana. ¡Este truco de gelatina es
+            increíble!</div>
+          <div class="fb-actions">
+            <span>Me gusta</span>
+            <span>Responder</span>
+            <span class="fb-time">hace 46 min</span>
+            <div class="fb-reactions">❤️ 😊 👍 <strong>21</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment 3 -->
+    <div class="fb-comment-box">
+      <div class="fb-comment-meta">
+        <div class="fb-avatar" style="background:#2ecc71;">JB</div>
+        <div class="fb-comment-body">
+          <div class="fb-commenter-name">Jessica Brown</div>
+          <div class="fb-comment-text">He estado usando este truco de gelatina por poco más de 3 semanas y ¡mis
+            pantalones ya se me caen! ¡Incluso mi esposo me elogió hoy! Gracias por ayudar a tanta gente sin pedir nada
+            a cambio.</div>
+          <div class="fb-badge">Resultado Jessica Brown</div>
+          <div class="fb-actions">
+            <span>Me gusta</span>
+            <span>Responder</span>
+            <span class="fb-time">hace 58 min</span>
+            <div class="fb-reactions">❤️ 😊 👍 <strong>18</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment 4 -->
+    <div class="fb-comment-box">
+      <div class="fb-comment-meta">
+        <div class="fb-avatar" style="background:#f39c12;">OT</div>
+        <div class="fb-comment-body">
+          <div class="fb-commenter-name">Olivia S. Taylor</div>
+          <div class="fb-comment-text">Por fin alguien que explica todo en solo unos minutos y sin jerga médica.
+            ¡Empiezo esta mañana! Gracias por ser tan clara y directa.</div>
+          <div class="fb-actions">
+            <span>Me gusta</span>
+            <span>Responder</span>
+            <span class="fb-time">hace 2 h</span>
+            <div class="fb-reactions">❤️ 😊 👍 <strong>26</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment 5 + replies -->
+    <div class="fb-comment-box">
+      <div class="fb-comment-meta">
+        <div class="fb-avatar" style="background:#9b59b6;">AD</div>
+        <div class="fb-comment-body">
+          <div class="fb-commenter-name">Ashley Davis</div>
+          <div class="fb-comment-text">Antes la ansiedad por comer me controlaba; siempre estaba comiendo dulces sin
+            parar. Pero ahora ya no los deseo, y ya bajé 19 libras en solo dos semanas. No me sentía tan segura desde
+            hace años.</div>
+          <div class="fb-actions">
+            <span>Me gusta</span>
+            <span>Responder</span>
+            <span class="fb-time">hace 3 h</span>
+            <div class="fb-reactions">❤️ 😊 👍 <strong>13</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reply Emily -->
+      <div class="fb-reply">
+        <div class="fb-comment-meta">
+          <div class="fb-avatar" style="background:#1abc9c; width:30px; height:30px; font-size:0.78rem;">EJ</div>
+          <div class="fb-comment-body">
+            <div class="fb-commenter-name">Emily Johnson</div>
+            <div class="fb-comment-text">Eso es increíble, hermosa. ¿Hiciste algo más en tu rutina además de la receta?
+            </div>
+            <div class="fb-actions">
+              <span>Me gusta</span>
+              <span>Responder</span>
+              <span class="fb-time">hace 46 min</span>
+              <div class="fb-reactions">❤️ 😊 👍 <strong>1</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reply Ashley -->
+      <div class="fb-reply">
+        <div class="fb-comment-meta">
+          <div class="fb-avatar" style="background:#9b59b6; width:30px; height:30px; font-size:0.78rem;">AD</div>
+          <div class="fb-comment-body">
+            <div class="fb-commenter-name">Ashley Davis</div>
+            <div class="fb-comment-text">No, ¡solo la receta! No hice dietas ni pisé el gimnasio. Es una locura cómo
+              algo tan simple me está ayudando a bajar tanto de peso.</div>
+            <div class="fb-actions">
+              <span>Me gusta</span>
+              <span>Responder</span>
+              <span class="fb-time">hace 17 min</span>
+              <div class="fb-reactions">❤️ 😊 👍 <strong>15</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment 6 + replies -->
+    <div class="fb-comment-box">
+      <div class="fb-comment-meta">
+        <div class="fb-avatar" style="background:#34495e;">MH</div>
+        <div class="fb-comment-body">
+          <div class="fb-commenter-name">Morgan Harper</div>
+          <div class="fb-comment-text">¿Alguien sabe si esto realmente funciona? Mi médico dice que tengo obesidad
+            extrema y me siento bastante desesperada.</div>
+          <div class="fb-actions">
+            <span>Me gusta</span>
+            <span>Responder</span>
+            <span class="fb-time">hace 12 min</span>
+            <div class="fb-reactions">❤️ 😊 👍 <strong>21</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reply Grace -->
+      <div class="fb-reply">
+        <div class="fb-comment-meta">
+          <div class="fb-avatar" style="background:#e74c3c; width:30px; height:30px; font-size:0.78rem;">GW</div>
+          <div class="fb-comment-body">
+            <div class="fb-commenter-name">Grace Wilson</div>
+            <div class="fb-comment-text">Investigué en internet y encontré varios artículos científicos que demuestran
+              que este truco de gelatina realmente funciona. En mi caso, los números en la balanza no paran de bajar —
+              ¡deberías probarlo tú también!</div>
+            <div class="fb-actions">
+              <span>Me gusta</span>
+              <span>Responder</span>
+              <span class="fb-time">hace 4 min</span>
+              <div class="fb-reactions">❤️ 😊 👍 <strong>1</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reply Morgan -->
+      <div class="fb-reply">
+        <div class="fb-comment-meta">
+          <div class="fb-avatar" style="background:#34495e; width:30px; height:30px; font-size:0.78rem;">MH</div>
+          <div class="fb-comment-body">
+            <div class="fb-commenter-name">Morgan Harper</div>
+            <div class="fb-comment-text">¡Gracias! Ya estoy anotando todos los ingredientes. ¡Confío en que esto va a
+              funcionar!</div>
+            <div class="fb-actions">
+              <span>Me gusta</span>
+              <span>Responder</span>
+              <span class="fb-time">hace 1 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /fb-section -->
+
+  <script>
+    // ── Viewer counter simulator (max 600) ──
+    const countEl = document.getElementById('viewer-count');
+    let count = Math.floor(Math.random() * 100) + 450; // start 450-549
+
+    function updateCount() {
+      const delta = Math.floor(Math.random() * 7) - 3; // -3 to +3
+      count = Math.max(380, Math.min(600, count + delta));
+      countEl.textContent = count.toLocaleString('es');
+    }
+
+    updateCount();
+    setInterval(updateCount, 3500);
+  </script>
+
+</body>
+
+</html>
